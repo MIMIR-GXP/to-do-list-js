@@ -1,25 +1,36 @@
+/**
+ * Displays a toast notification with a specified message and type.
+ *
+ * @param {Object} options - Configuration options for the toast.
+ * @param {string} options.message - The message to display in the toast.
+ * @param {string} options.type - The type of toast, e.g., 'success' or 'error'.
+ */
 export function toast({ message, type }) {
-  let existingToast = document.querySelector(".toast");
+  const existingToast = document.querySelector(".toast");
   if (existingToast) {
     return;
   }
 
-  const toast = document.createElement("div");
-  toast.className = `toast ${type}`;
-  toast.innerText = message;
-  document.body.appendChild(toast);
+  const toastElement = document.createElement("div");
+  toastElement.className = `toast ${type}`;
+  toastElement.innerText = message;
+  document.body.appendChild(toastElement);
 
+  // Show the toast with animation
   requestAnimationFrame(() => {
-    toast.style.transition = "transform 0.5s ease, opacity 0.5s ease";
-    toast.style.transform = "translate(-50%, -20px)";
-    toast.style.opacity = "1";
+    toastElement.style.transition = "transform 0.5s ease, opacity 0.5s ease";
+    toastElement.style.transform = "translate(-50%, -20px)";
+    toastElement.style.opacity = "1";
   });
 
+  // Hide the toast after 5 seconds
   setTimeout(() => {
-    toast.style.transform = "translate(-50%, 20px)";
-    toast.style.opacity = "0";
+    toastElement.style.transform = "translate(-50%, 20px)";
+    toastElement.style.opacity = "0";
+
+    // Remove the toast element after the animation
     setTimeout(() => {
-      document.body.removeChild(toast);
+      document.body.removeChild(toastElement);
     }, 500);
   }, 5000);
 }

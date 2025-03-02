@@ -1,20 +1,31 @@
+/**
+ * Toggles the visibility of the password input field by switching between show and hide buttons.
+ */
 export function passwordInputShowButton() {
-  const passwordShow = document.getElementById("password-show");
-  const passwordHidden = document.getElementById("password-hidden");
-  const passwordInput = document.getElementById("password-input");
+  const passwordShowBtn = document.getElementById("password-show");
+  const passwordHideBtn = document.getElementById("password-hidden");
+  const passwordInput = document.getElementById("password");
 
-  if (passwordShow) {
-    passwordShow.addEventListener("click", () => {
+  if (passwordShowBtn && passwordHideBtn && passwordInput) {
+    /**
+     * Event handler to show the password.
+     */
+    const showPassword = () => {
       passwordInput.type = "text";
-      passwordShow.style.display = "none";
-      passwordHidden.style.display = "block";
-    });
-  }
-  if (passwordHidden) {
-    passwordHidden.addEventListener("click", () => {
+      passwordShowBtn.style.display = "none";
+      passwordHideBtn.style.display = "block";
+    };
+
+    /**
+     * Event handler to hide the password.
+     */
+    const hidePassword = () => {
       passwordInput.type = "password";
-      passwordShow.style.display = "block";
-      passwordHidden.style.display = "none";
-    });
+      passwordShowBtn.style.display = "block";
+      passwordHideBtn.style.display = "none";
+    };
+
+    passwordShowBtn.addEventListener("click", showPassword);
+    passwordHideBtn.addEventListener("click", hidePassword);
   }
 }

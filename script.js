@@ -1,21 +1,40 @@
-import { signIn, signUp } from "./modules/auth.js";
+import { app } from "./modules/app.js";
+import { signIn, signOut, signUp } from "./modules/auth.js";
 import { passwordInputShowButton } from "./modules/password-input.js";
 
 /*
-  Appel de la fonction signUp
-  pour faire fonctionner le formulaire d'inscription.
+  Initialization of authentication functions and password visualization.
 */
 signUp();
-
-/*
-  Appel de la fonction signIn
-  pour faire fonctionner le formulaire de connexion.
-*/
 signIn();
+passwordInputShowButton();
+signOut();
 
 /*
-  Appel de la fonction passwordInputShowButton
-  pour faire fonctionner le bouton de visualisation du mot de passe sur le 
-  champ de mot de passe dans le formulaire de connexion et d'inscription.
+  Management of redirections based on the user's state and the current path.
 */
-passwordInputShowButton();
+const currentUser = localStorage.getItem("currentUser");
+const path = window.location.pathname;
+
+// Define access paths
+const appPath = "/app/app.html";
+const homePath = "/";
+const signInPath = "/auth/sign-in.html";
+const signUpPath = "/auth/sign-up.html";
+
+// If the user is logged in
+if (currentUser) {
+  // Redirect away from home and authentication pages to the application
+  if ([homePath, signInPath, signUpPath].includes(path)) {
+    window.location.href = appPath;
+  }
+  // Initialize the application if on the application page
+  else if (path === appPath) {
+    app();
+  }
+} else {
+  // If the user is not logged in, prevent access to the application
+  if (path === appPath) {
+    window.location.href = homePath;
+  }
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles/style.css">
+  <title>To-Do-List</title>
+</head>
+
+<body>
+  <div class="flex justify-between items-center">
+    <h1>TP : To-Do-List</h1>
+    <button id="logout-btn" class="flex items-center bg-destructive gap">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="lucide lucide-log-out small-icon">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+        <polyline points="16 17 21 12 16 7" />
+        <line x1="21" x2="9" y1="12" y2="12" />
+      </svg>
+      Logout
+    </button>
+  </div>
+  <hr>
+  <section>
+    <!-- Modal Create todo -->
+    <div class="modal hidden" id="modal">
+      <form class="flex items-center w-full relative" id="todo-form">
+        <h2>Add a To-Do</h2>
+        <button type="button" id="modal-close-btn" class="modal-close-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-x small-icon">
+            <path d="M18 6 6 18" />
+            <path d="m6 6 12 12" />
+          </svg>
+        </button>
+        <div class="input-group">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" placeholder="Title" required>
+        </div>
+        <div class="input-group">
+          <label for="status">Status</label>
+          <div class="input-select-container">
+            <select id="status" name="status" placeholder="Status" required>
+              <option value="todo">To Do</option>
+              <option value="done">Done</option>
+            </select>
+            <svg id="carret-down" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-chevron-down carret-down small-icon">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="deadline">Deadline</label>
+          <input type="date" id="deadline" name="deadline" required>
+        </div>
+        <div class="input-group">
+          <label for="description">Description</label>
+          <textarea id="todo-textarea" name="description" placeholder="Description" required></textarea>
+        </div>
+
+        <button id="add-todo-btn" class="w-full">Add</button>
+      </form>
+    </div>
+
+    <!-- Todo -->
+    <div class="flex gap justify-around w-full">
+      <div class="stage">
+        <div class="flex justify-between items-center min-h-title">
+          <h2>To Do</h2>
+          <button type="button" id="create-todo-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-plus small-icon">
+              <path d="M5 12h14" />
+              <path d="M12 5v14" />
+            </svg>
+          </button>
+        </div>
+        <ul id="todo-list-todo" class="scroll-container">
+          <!-- Displayed by JS -->
+        </ul>
+      </div>
+      <div class="stage">
+        <div class="flex justify-between items-center min-h-title">
+          <h2>Done</h2>
+        </div>
+        <ul id="todo-list-done" class="scroll-container">
+          <!-- Displayed by JS -->
+        </ul>
+      </div>
+    </div>
+  </section>
+  <script src="../script.js" type="module"></script>
+</body>
+
+</html>
